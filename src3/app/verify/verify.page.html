@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Verify number</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item>
+      <ion-label position="floating">Gmail</ion-label>
+      <ion-input type= 'text' [(ngModel)]="num"></ion-input>
+    </ion-item>
+    
+  </ion-list>
+  <ion-text >
+    <h1>You will have 10 minutes to enter the number</h1>
+  </ion-text>
+  
+  <ion-button fill="solid" expand="block" color="dark" (click)="verify()">SIGNUP</ion-button>
+</ion-content>
