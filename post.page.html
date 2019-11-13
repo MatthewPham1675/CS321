@@ -1,0 +1,19 @@
+<ion-content>
+  <ion-list>
+    <ion-item> 
+        <ion-label stacked>Name Of Item</ion-label>
+       <ion-input type="text" text-right id="input" [(ngModel)]="name"></ion-input>
+    </ion-item> 
+    <ion-item> 
+        <ion-label stacked>Price Of Item</ion-label>
+       <ion-input type="text" text-right id="input" [(ngModel)]="price"></ion-input>
+    </ion-item> 
+    <ion-item> 
+        <ion-label stacked>Quantity Of Item</ion-label>
+       <ion-input type="text" text-right id="input" [(ngModel)]="quantity"></ion-input>
+    </ion-item>   
+  </ion-list>
+  <ion-button (click)="confirm()">
+    Confirm
+  </ion-button>
+</ion-content>
