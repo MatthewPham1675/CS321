@@ -1,5 +1,7 @@
 {
   "name": "patriot-passup",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

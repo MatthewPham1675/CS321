@@ -14,6 +14,13 @@ import {FirebaseUIModule, firebase, firebaseui} from 'firebaseui-angular';
 import {AngularFireModule} from '@angular/fire';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
+import { Camera } from '@ionic-native/camera/ngx';
+import {IonicStorageModule} from '@ionic/storage';
+
+import {AngularFirestoreModule} from '@angular/fire/firestore';
+import { AngularFireFunctionsModule, FunctionsRegionToken } from '@angular/fire/functions'
+import { UserService } from './user.service';
+import { HttpModule } from '@angular/http';
 
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
@@ -38,11 +45,18 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
       AppRoutingModule,
       AngularFireModule.initializeApp(environment.firebaseConfig),
       AngularFireAuthModule,
-      FirebaseUIModule.forRoot(firebaseUiAuthConfig)
+      FirebaseUIModule.forRoot(firebaseUiAuthConfig),
+      IonicStorageModule.forRoot(),
+      AngularFirestoreModule,
+      AngularFireFunctionsModule,
+      HttpModule,
     ],
   providers: [
     StatusBar,
     SplashScreen,
+    Camera,
+    UserService,
+    { provide: FunctionsRegionToken, useValue: 'us-central1'},
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent],

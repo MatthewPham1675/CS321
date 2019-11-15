@@ -1,9 +1,36 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>post</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-header >
+    <ion-toolbar color="success" >
+      <ion-title class="profile">Post Item</ion-title>
+    </ion-toolbar>
+  </ion-header>
+<ion-content padding>
+  <ion-list>
+    <ion-item> 
+        <ion-label color="primary" stacked>Name Of Item</ion-label>
+       <ion-input placeholder="name" type="text" text-right id="input" [(ngModel)]="name"></ion-input>
+    </ion-item> 
+    <ion-item> 
+        <ion-label color="primary" stacked>Price Of Item</ion-label>
+       <ion-input placeholder="$$$$" type="text" text-right id="input" [(ngModel)]="price"></ion-input>
+    </ion-item> 
+    <ion-item> 
+      <ion-label color="primary" floating>Item Details:</ion-label>
+      <ion-textarea placeholder="Text" rows=7 [(ngModel)]="description"></ion-textarea>
+   </ion-item>    
+   <!--ion-item>
+      <ion-button size=4 ion-button full (click)="loadImage()">Load Picture</ion-button>
+   </ion-item-->
+  </ion-list>
 
-<ion-content>
+  <input type="file" (change)="fileChanged($event)" />
+  <ion-button color="secondary" (click)="reload()">Refresh</ion-button>
+
+  <h2>Image </h2>
+  <img *ngIf="imageURL" src="https://ucarecdn.com/{{ imageURL }}/" />
+
+  <br>
+
+  <ion-button size=4 ion-button full (click)="createPost()">Post</ion-button>
 
 </ion-content>
+

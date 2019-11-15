@@ -1,0 +1,22 @@
+ion-content{
+    --background: url(../../assets/wallpaper.png) no-repeat center center / cover;
+
+}
+
+.ios, .md{
+
+    page-feed {
+
+        .pins {
+            column-count: 3;
+        }
+
+        .pin {
+
+            display: inline-grid;
+            grid-template-columns: 25rem 25 rem 25 rem;
+            padding: 25px;
+
+        }
+    }
+}
