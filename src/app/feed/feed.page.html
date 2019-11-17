@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>feed</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card *ngFor="let item of items" (click) = 'expand(item)'>
+    
+    <ion-img width="80" height="80"src = "https://ucarecdn.com/{{item.photo}}/-/preview/300x500/-/filter/varriel/-43/"></ion-img> 
+    <ion-card-header>
+      <ion-card-subtitle>{{item.name}}</ion-card-subtitle>
+      
+    </ion-card-header>
+    <ion-card-content>
+      {{item.price}}
+    </ion-card-content>
+  </ion-card>
+ 
+</ion-content>

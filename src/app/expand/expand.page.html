@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>expand</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+      
+      <ion-content>
+          <ion-card >
+          
+          <ion-img width="180" height="100" src = "https://ucarecdn.com/{{item.photo}}/-/preview/720x720/-/filter/varriel/-43/"></ion-img> 
+          <ion-card-header>
+            <ion-card-subtitle>{{item.seller}}</ion-card-subtitle>
+            
+            <ion-card-title>{{item.name}} - {{item.price}}</ion-card-title>
+          </ion-card-header>
+          
+          <ion-card-content>
+            {{item.description}}
+          </ion-card-content>
+        </ion-card>
+       
+      </ion-content>
+  <ion-button fill="solid" expand="block" color="dark" (click)="back()">back</ion-button>
+  <ion-button fill="solid" expand="block" color="dark" (click)="buying()">Don't have an account?</ion-button>
+</ion-content>

@@ -1,0 +1,30 @@
+<ion-header *ngIf="!hasVerifiedEmail" padding class="verify-email">
+  <div>
+    Please check your email and verify you are a Mason Student
+  </div>
+  <div>
+    <ion-button *ngIf="masonEmail" color="secondary" (click)="sendVerificationEmail()">Send Verification Email</ion-button>
+    <ion-button color="secondary" (click)="reload()">Refresh</ion-button>
+  </div>
+  <div *ngIf="sentTimestamp">
+    Verification email sent at {{sentTimeStamp | date:'medium'}}
+  </div>
+</ion-header>
+
+<ion-content padding>
+    <firebase-ui class="fade"></firebase-ui>
+    <h1 *ngIf="afAuth.auth.currentUser" padding class="mason-warning">
+        Welcome {{afAuth.auth.currentUser.displayName}}!
+      <h2 class="confirm" *ngIf="!hasVerifiedEmail">
+        This application is only for Mason Students
+      <br>
+        Please Login with Mason Email
+        <ion-button *ngIf="!hasVerifiedEmail" (click)="masonCheck()">Confirm Email</ion-button>
+      </h2>
+      </h1>
+  
+      <ion-button color="danger" *ngIf="afAuth.auth.currentUser" (click)="signOut()">Return to Login</ion-button>
+  
+      
+
+</ion-content>
