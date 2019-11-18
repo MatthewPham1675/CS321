@@ -17,7 +17,7 @@
 <ion-content padding>
 
   <div id="image" col-3>
-    <ion-card class="image" *ngFor="let item of (userPosts | async)?.items">
+    <ion-card class="image" *ngFor="let item of (userPosts | async)?.items" (click) = 'showConfirmAlert(item)'>
         <ion-img src="https://ucarecdn.com/{{ item.image }}/-/crop/300x300/center/"></ion-img>
      <ion-card-header>
             <ion-card-subtitle>{{item.name}}</ion-card-subtitle>
