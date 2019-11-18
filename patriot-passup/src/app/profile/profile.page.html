@@ -1,9 +1,34 @@
 <ion-header >
-  <ion-toolbar color="success" >
-    <ion-title class="profile">MyProfile</ion-title>
+  <ion-toolbar color=primary>
+      <ion-title style="background: transparent !important;">
+          <ion-img src="assets/PatriotPassupHeader.PNG"></ion-img>
+          </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-toolbar>
+    <ion-card-subtitle>User Name: {{afAuth.auth.currentUser.email}}</ion-card-subtitle>
+</ion-toolbar>
+
+<ion-toolbar>
+    <ion-title>My posted Items</ion-title>
+</ion-toolbar>
+
+<ion-content padding>
+
+  <div id="image" col-3>
+    <ion-card class="image" *ngFor="let item of (userPosts | async)?.items">
+        <ion-img src="https://ucarecdn.com/{{ item.image }}/-/crop/300x300/center/"></ion-img>
+     <ion-card-header>
+            <ion-card-subtitle>{{item.name}}</ion-card-subtitle>
+     </ion-card-header>
+    </ion-card>
+  </div>
+
+  <ion-button color="tertiary" (click)="help()">Help</ion-button>
+
   <ion-button *ngIf="afAuth.auth.currentUser" (click)="signOut()">Sign Out</ion-button>
+
+  <h2>Report Problem @ (703) 993-2810</h2>
+
 </ion-content>

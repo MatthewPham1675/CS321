@@ -1,4 +1,8 @@
 ion-content{
+    --header: url(../../assets/PatriotPassUpHeader.png) no-repeat center center / cover;
+
+}
+ion-content{
     --background: url(../../assets/wallpaper.png) no-repeat center center / cover;
 
 }
@@ -7,4 +11,13 @@ ion-content{
     font-family: monospace;
     font-size: 40px;
     font-weight: 300;
+}
+
+#images {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.image {
+    width: 33%
 }

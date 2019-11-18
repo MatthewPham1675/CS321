@@ -10,7 +10,9 @@ const routes: Routes = [
   { path: 'post', loadChildren: './post/post.module#PostPageModule' },
   { path: 'chats', loadChildren: './chats/chats.module#ChatsPageModule' },
   { path: 'profile', loadChildren: './profile/profile.module#ProfilePageModule' },
-  { path: 'feed', loadChildren: './feed/feed.module#FeedPageModule' },
+  { path: 'feed', loadChildren: './feed/feed.module#FeedPageModule' },  { path: 'expand', loadChildren: './expand/expand.module#ExpandPageModule' },
+  { path: 'help', loadChildren: './help/help.module#HelpPageModule' },
+
 ];
 
 @NgModule({

@@ -19,6 +19,20 @@ export class UserService {
     }
 
     getUID() {
+        if(!this.user) {
+            if(this.afAuth.auth.currentUser.uid) {
+                const user = this.afAuth.auth.currentUser
+                this.setUser({
+                    username: user.email,
+                    uid: user.uid
+                })
+                return user.uid
+            } else {
+                throw new Error("User not logged in")
+            }
+            
+        }
+
         return this.afAuth.auth.currentUser.uid
     }
 }

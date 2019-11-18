@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar color=primary>
+      <ion-title style="background: transparent !important;">
+          <ion-img src="assets/PatriotPassupHeader.PNG"></ion-img>
+          </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <ion-button fill="solid" expand="block" color="primary" (click)="back()">Back</ion-button>
+  </div>
+      <ion-content>
+          <ion-card >
+          <ion-img width="180" height="100" src = "https://ucarecdn.com/{{item.photo}}/-/preview/720x720/-/filter/varriel/-43/"></ion-img> 
+          <ion-card-header>
+            <ion-card-subtitle>{{item.seller}}</ion-card-subtitle>
+            <ion-card-title>{{item.name}} - {{item.price}}</ion-card-title>
+          </ion-card-header>
+          
+          <ion-card-content>
+            {{item.description}}
+          </ion-card-content>
+          <ion-button fill="solid" expand="block" color="primary" (click)="buying()">Notify User</ion-button>
+          <h2 rows=6>_</h2>
+
+        </ion-card>
+      </ion-content>
+    
+</ion-content>

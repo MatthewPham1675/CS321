@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
@@ -10,19 +11,20 @@ import { AngularFirestore } from '@angular/fire/firestore';
 
 
 @Component({
-
   selector: 'app-post',
   templateUrl: './post.page.html',
   styleUrls: ['./post.page.scss'],
-
 })
 
+
 export class PostPage {
+
   public photos: Photo[] = [];
   public name = '';
-  public price = 0;
+  public price: number ;
   public description = '';
   imageURL: string;
+  public gmail = this.user.afAuth.auth.currentUser.email;
 
   constructor(
     public navCtr: NavController,
@@ -33,18 +35,24 @@ export class PostPage {
     public http: Http,
     public user: UserService,
     public alert: AlertController) {
+
   }
 
-  // gogi function
   createPost() {
-    if((this.imageURL === null) || (this.name === '') || (this.price === 0) || (this.description === '') ){
+
+    if ((this.imageURL === null) || (this.name === '') || (this.price === null) || (this.description === '') ) {
       this.showAlert('Sorry', 'You have incomplete fields');
       return;
     }
-    const image = this.imageURL
-    const name = this.name
-    const  description = this.description
-    const  price = this.price
+
+    const image = this.imageURL;
+    const name = this.name;
+    const  description = this.description;
+    const  price = this.price;
+    const buyers = [];
+    const photo = image;
+    const sellerid = this.user.getUID();
+    const seller = this.user.afAuth.auth.currentUser.email;
 
     this.afstore.doc(`Users/${this.user.getUID()}`).update({
       items: firestore.FieldValue.arrayUnion({
@@ -52,29 +60,47 @@ export class PostPage {
         name,
         description,
         price,
+        buyers
       })
-    })
-      
+    });
+
     this.showAlert('Congrats!', 'Item Uploaded');
- 
+
+    this.afstore.doc(`Items/${name + seller}`).set({
+
+      name,
+      photo,
+      price,
+      description,
+      seller,
+      sellerid
+    });
+
+    this.price = null;
+    this.imageURL = null;
+    this.description = '';
+    this.name = '';
+
   }
 
-  // gogi function
-  fileChanged(event) {
-    const files = event.target.files
 
-    const data = new FormData()
-    data.append('file', files[0])
-    data.append('UPLOADCARE_STORE', '1')
-    data.append('UPLOADCARE_PUB_KEY', '2987131ae4bff38c22e4')
+  fileChanged(event) {
+    const files = event.target.files;
+    const data = new FormData();
+    data.append('file', files[0]);
+    data.append('UPLOADCARE_STORE', '1');
+    data.append('UPLOADCARE_PUB_KEY', 'd03ffdee519344e3a574');
 
     this.http.post('https://upload.uploadcare.com/base/', data)
-    .subscribe(event => {
-        console.log(files)
-        this.imageURL = event.json().file
-    })
-  
+
+    .subscribe( event => {
+        console.log(files);
+        this.imageURL = event.json().file;
+    });
+
   }
+
+
 
   loadImage() {
     this.photos = [];
@@ -86,6 +112,7 @@ export class PostPage {
       targetWidth: 200,
       targetHeight: 200,
     };
+
 
     this.camera.getPicture(options).then((imageData) => {
       // Add new photo to gallery
@@ -102,8 +129,9 @@ export class PostPage {
     });
 
   }
+
   async post() {
-    if((this.photos === []) || (this.name === '') || (this.price === 0) || (this.description === '') ){
+    if((this.photos === []) || (this.name === '') || (this.price === null) || (this.description === '') ){
       this.showAlert('Sorry', 'You have incomplete fields');
       return;
     }
@@ -114,6 +142,7 @@ export class PostPage {
       description: this.description,
       price: this.price
     };
+
 
     try {
       this.db.collection('Items').add(Item);
@@ -134,17 +163,16 @@ export class PostPage {
       message,
       buttons: ['Ok']
     });
-
     (await alert).present();
+
   }
 
-  reload(){
+
+  reload() {
     window.location.reload();
   }
-
 }
 
 class Photo {
   data: any;
 }
-

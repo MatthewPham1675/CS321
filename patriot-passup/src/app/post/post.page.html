@@ -1,6 +1,8 @@
 <ion-header >
     <ion-toolbar color="success" >
-      <ion-title class="profile">Post Item</ion-title>
+        <ion-title style="background: transparent !important;">
+            <ion-img src="assets/PatriotPassupHeader.PNG"></ion-img>
+         </ion-title>
     </ion-toolbar>
   </ion-header>
 <ion-content padding>
@@ -22,15 +24,16 @@
    </ion-item-->
   </ion-list>
 
-  <input type="file" (change)="fileChanged($event)" />
-  <ion-button color="secondary" (click)="reload()">Refresh</ion-button>
+  <input type="file" *ngIf="!imageUrl" (change)="fileChanged($event)"/>
 
   <h2>Image </h2>
-  <img *ngIf="imageURL" src="https://ucarecdn.com/{{ imageURL }}/" />
+  <img *ngIf="imageURL" src="https://ucarecdn.com/{{ imageURL }}/"/>
 
   <br>
 
-  <ion-button size=4 ion-button full (click)="createPost()">Post</ion-button>
+  <ion-img (click)="createPost()"style="width: 200px; 
+    height: 200px; background: transparent !important;" src="assets/Post.png">
+    </ion-img>
 
 </ion-content>
 

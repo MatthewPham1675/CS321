@@ -1,35 +1,67 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
-import { IonicModule, NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
-import { AngularFireFunctions } from '@angular/fire/functions'
-
+import { AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
+import {  Router, NavigationExtras} from '@angular/router';
 
 @Component({
   selector: 'app-feed',
-  templateUrl: 'feed.page.html',
-  styleUrls: ['feed.page.scss'],
+  templateUrl: './feed.page.html',
+  styleUrls: ['./feed.page.scss'],
 })
 
-export class FeedPage implements OnInit
-{
-  posts
-  sub
-  constructor(private aff: AngularFireFunctions) {
+export class FeedPage implements OnInit {
+  items = [];
 
+  public itemList: any[];
+  public loadedItem: any[];
+
+  constructor(private firestore: AngularFirestore, private router: Router) {
+    this.firestore.collection('Items').snapshotChanges().subscribe(colsnap =>  {
+      this.items = [];
+      colsnap.forEach(snap => {
+        const item: any = snap.payload.doc.data();
+        this.items.push(item);
+      });
+    });
   }
 
-  ngOnInit(): void {
-    const getFeed = this.aff.httpsCallable('getFeed')
-    this.sub = getFeed({}).subscribe(data => {
-      this.posts = data;
+  ngOnInit() {
+    this.firestore.collection('Items').valueChanges().subscribe(itemList => {
+      this.itemList = itemList;
+      this.loadedItem = itemList;
     })
   }
 
-  ngOnDestroy(){
-    this.sub.unsubscribe()
+  initializeItems(): void {
+    this.itemList = this.loadedItem;
   }
 
+  filterList(evt) {
+    this.initializeItems();
+
+    const searchItem = evt.srcElement.value;
+
+    if(!searchItem) {
+      return;
+    }
+
+    this.itemList = this.itemList.filter(currentItem => {
+      if(currentItem.name && searchItem) {
+        if(currentItem.name.toLowerCase().indexOf(searchItem.toLowerCase()) > -1) {
+          return true;
+        }
+        return false;
+      }
+    })
+  }
+
+
+  expand(ite: any){
+    const navigationExtras: NavigationExtras = {
+      state: {
+        item: ite
+      }
+    };
+
+    this.router.navigate(['expand'], navigationExtras  );
+  }
 }

@@ -30,13 +30,7 @@ export class FeedPageModule
   items: string[];
   generateItems()
   {
-    this.items = [
-      'Calculus 1 Textbook',
-      'Calculus 2 Textbook',
-      'Calculus 3 Textbook',
-      'Physics 1 Textbook',
-      'Physics 2 Textbook'
-    ];
+    
   }
   getItems(ev: any)
   {

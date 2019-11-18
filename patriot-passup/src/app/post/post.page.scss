@@ -7,3 +7,10 @@ ion-content{
     font-size: 40px;
     font-weight: 300;
 }
+
+.filebtn {
+    opacity: 0;
+    position: absolute;
+    top: -100em;
+    left: -100em;
+}
